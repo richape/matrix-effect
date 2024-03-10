@@ -1,8 +1,8 @@
-const columns = 800
-const rows = 90
+const columns = 600
+const rows = 65
 const characters =
   // 'A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z   a   b   c   d   e   f   g   h   i   j   k   l   m   n   o   p   q   r   s   t   u   v   w   x   y   z   0   1   2   3   4   5   6   7   8   9   !   @   #   $   %   ^   &   *   (   )   _   +   -   =   [   ]   {   }   |   ;   :   ,   .   <   >   ?   /      '
-  '0 1 0 1 0'
+  '0 1 1 0 1 0'
 const characterArray = characters.split('')
 const characterColors = ['#00ff00', '#00dd00', '#00bb00', '#009900']
 const matrix = []
@@ -54,7 +54,7 @@ function matrixEffect(layerIndex = 0) {
     clearScreen()
     updateMatrix()
     renderMatrix(characterColors[layerIndex])
-    setTimeout(() => matrixEffect(layerIndex + 1), 100)
+    setTimeout(() => matrixEffect(layerIndex + 1), 90)
   } else {
     setTimeout(matrixEffect, 100)
   }
