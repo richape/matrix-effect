@@ -1,10 +1,8 @@
 const columns = 10000
 const rows = 65
-const characters =
-  // 'A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z   a   b   c   d   e   f   g   h   i   j   k   l   m   n   o   p   q   r   s   t   u   v   w   x   y   z   0   1   2   3   4   5   6   7   8   9   !   @   #   $   %   ^   &   *   (   )   _   +   -   =   [   ]   {   }   |   ;   :   ,   .   <   >   ?   /      '
-  '0 1 1 0 1 0'
+const characters = '0 1 1 0 1 0'
 const characterArray = characters.split('')
-const characterColors = ['#00ff00', '#00dd00', '#00bb00', '#009900']
+const characterColors = ['#00ff00', '#00dd00', '#00bb00', '#009900', '#007700']
 const matrix = []
 let timeoutId
 
@@ -34,12 +32,13 @@ function updateMatrix() {
   })
 }
 
-function renderMatrix(color) {
+function renderMatrix(color, layerIndex) {
   for (let i = 0; i < matrix.length; i++) {
     const row = matrix[i]
     const rowElement = document.createElement('div')
     rowElement.textContent = row.join('')
-    rowElement.style.opacity = 1 - i / matrix.length
+    rowElement.style.opacity =
+      1 - (i + layerIndex) / (matrix.length + characterColors.length)
     rowElement.style.color = color
     document.body.appendChild(rowElement)
   }
@@ -53,7 +52,7 @@ function matrixEffect(layerIndex = 0) {
   if (layerIndex < characterColors.length) {
     clearScreen()
     updateMatrix()
-    renderMatrix(characterColors[layerIndex])
+    renderMatrix(characterColors[layerIndex], layerIndex)
     setTimeout(() => matrixEffect(layerIndex + 1), 90)
   } else {
     setTimeout(matrixEffect, 100)
